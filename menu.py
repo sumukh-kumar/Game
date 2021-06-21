@@ -6,7 +6,7 @@ pygame.init()
 
 Clock=pygame.time.Clock()
 FPS= 60
-pygame.display.set_caption("Game")
+pygame.display.set_caption("Maze Duel")
 Width, Height = 1280,720
 WIN=pygame.display.set_mode((Width,Height))
 
@@ -19,11 +19,38 @@ BLUE=(0,0,255)
 
 click=False
 
-Background_image_unrefined= pygame.image.load(os.path.join("images","Better.jpg"))
-Background=pygame.transform.scale(Background_image_unrefined,(Width,Height))
-Button_bg_unrefined=pygame.image.load(os.path.join("images","Text_Bg.png"))
-Button_bg=pygame.transform.scale(Button_bg_unrefined,(223,60))
+normal_size=(300,130)
+enlarged_size=(330,160)
 
+Background_image_unrefined= pygame.image.load(os.path.join("images","Standard.png"))
+Background=pygame.transform.scale(Background_image_unrefined,(Width,Height))
+
+Button_play_unrefined=pygame.image.load(os.path.join("images","Buttonplay.png"))
+Image_play=pygame.transform.scale(Button_play_unrefined,(normal_size))
+Image_play_enlarged=pygame.transform.scale(Button_play_unrefined,(enlarged_size))
+
+Button_options_unrefined=pygame.image.load(os.path.join("images","Buttonoptions.png"))
+Image_options=pygame.transform.scale(Button_options_unrefined,(normal_size))
+Image_options_enlarged=pygame.transform.scale(Button_options_unrefined,(enlarged_size))
+
+Button_exit_unrefined=pygame.image.load(os.path.join("images","Buttonexit.png"))
+Image_exit=pygame.transform.scale(Button_exit_unrefined,(normal_size))
+Image_exit_enlarged=pygame.transform.scale(Button_exit_unrefined,(330,145))
+
+Button_fullscreen_unrefined=pygame.image.load(os.path.join("images","Buttonfullscrn.png"))
+Image_fullscreen=pygame.transform.scale(Button_fullscreen_unrefined,(normal_size))
+Image_fullscreen_enlarged=pygame.transform.scale(Button_fullscreen_unrefined,(enlarged_size))
+
+Button_login_unrefined=pygame.image.load(os.path.join("images","Login.png"))
+Image_login=pygame.transform.scale(Button_login_unrefined,(normal_size))
+Image_login_enlarged=pygame.transform.scale(Button_login_unrefined,(enlarged_size))
+
+Button_back_unrefined=pygame.image.load(os.path.join("images","Buttonback.png"))
+Image_back=pygame.transform.scale(Button_back_unrefined,(160,100))
+
+
+Button_bg_unrefined=pygame.image.load(os.path.join("images","Text_Bg.png"))
+Button_bg=pygame.transform.scale(Button_bg_unrefined,(220,80))
 
 
 
@@ -41,22 +68,32 @@ def main_menu():
             mx,my=pygame.mouse.get_pos()
             bonk=(mx,my)
 
-            button_play=WIN.blit(Button_bg,(35,400))
-            button_options=WIN.blit(Button_bg,(35,500))
-            button_exit=WIN.blit(Button_bg,(35,600))
+            button_play=WIN.blit(Image_play,(35,300))
+            button_options=WIN.blit(Image_options,(35,450))
+            button_exit=WIN.blit(Image_exit,(35,600))
 
 
             if button_play.collidepoint((bonk)):
+                WIN.blit(Background,(0,0))
+                button_options=WIN.blit(Image_options,(35,450))
+                button_exit=WIN.blit(Image_exit,(35,600))
+                button_play=WIN.blit(Image_play_enlarged,(35,300))
                 if click==True:
                     play_pressed()
                     
             if button_options.collidepoint((bonk)):
+                WIN.blit(Background,(0,0))
+                button_options=WIN.blit(Image_options_enlarged,(35,450))
+                button_exit=WIN.blit(Image_exit,(35,600))
+                button_play=WIN.blit(Image_play,(35,300))
                 if click==True:
                     options_pressed()
 
-            draw_text("Play",font,BLACK,WIN,50,425)
-            draw_text("Options",font,BLACK,WIN,50,525)
-            draw_text("Exit game",font,BLACK,WIN,50,625)
+            if button_exit.collidepoint((bonk)):
+                    WIN.blit(Background,(0,0))
+                    button_exit=WIN.blit(Image_exit_enlarged,(35,600))
+                    button_play=WIN.blit(Image_play,(35,300))
+                    button_options=WIN.blit(Image_options,(35,450))
 
             click=False
 
@@ -84,8 +121,8 @@ def play_pressed():
     while running:
         
         WIN.blit(Background,(0,0))
-        
-        draw_text("Play",font,BLUE,WIN,20,20)
+        #draw_text("Play",font,BLUE,WIN,20,20)
+
         mx,my=pygame.mouse.get_pos()
         bonk=(mx,my)
 
@@ -116,15 +153,25 @@ def options_pressed():
         mx,my=pygame.mouse.get_pos()
         bonk=(mx,my)
 
-        button_fullscreen=WIN.blit(Button_bg,(35,600))
-        button_login=WIN.blit(Button_bg,(35,500))
+        button_fullscreen=WIN.blit(Image_fullscreen,(35,400))
+        button_login=WIN.blit(Image_login,(35,575))
+        button_back=WIN.blit(Image_back,(-10,5))
 
 
 
-        draw_text("User Login",font,BLACK,WIN,50,525)
-        draw_text("Toggle fullscreen",font,BLACK,WIN,50,625)
-        draw_text("Options",font,BLUE,WIN,20,20)
+        if button_fullscreen.collidepoint((bonk)):
+            WIN.blit(Background,(0,0))
+            WIN.blit(Image_fullscreen_enlarged,(35,400))
+            WIN.blit(Image_login,(35,575))
+            button_back=WIN.blit(Image_back,(-10,5))
         
+        if button_login.collidepoint((bonk)):
+            WIN.blit(Background,(0,0))
+            WIN.blit(Image_login_enlarged,(35,575))
+            button_fullscreen=WIN.blit(Image_fullscreen,(35,400))
+            button_back=WIN.blit(Image_back,(-10,5))
+
+
         for event in pygame.event.get():
             if event.type==QUIT:
                 pygame.QUIT()
@@ -143,6 +190,13 @@ def options_pressed():
             if button_login.collidepoint((bonk)):
                 if click==True:
                     login_pressed()
+            if button_back.collidepoint((bonk)):
+                if click==True:
+                        Transition_moving.fadetoblack(Width,Height)
+                        Transition_moving.fadetoscreen(Width,Height)
+                        running=False
+
+
         pygame.display.update()
         Clock.tick(FPS)
 
@@ -155,7 +209,7 @@ def login_pressed():
     running=True
     while running:
         WIN.blit(Background,(0,0))
-        draw_text("Login screen",font,BLUE,WIN,20,20)
+
 
         mx,my=pygame.mouse.get_pos()
         bonk=(mx,my)
