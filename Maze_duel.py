@@ -1,6 +1,6 @@
 import pygame,sys,os
 from pygame.locals import *
-import Transition_moving , constants
+from Functions_Constants import constants , Transition_moving
 
 pygame.init()
 
