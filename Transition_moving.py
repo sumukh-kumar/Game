@@ -9,7 +9,7 @@ pygame.init()
 def fadetoblack(Width,Height): 
     fade = pygame.Surface((Width, Height))
     fade.fill((0,0,0))
-    for alpha in range(0, 200):
+    for alpha in range(0, 200,2):
         fade.set_alpha(alpha)
         constants.WIN.blit(fade, (0,0))
         pygame.display.update()
@@ -18,7 +18,7 @@ def fadetoblack(Width,Height):
 def fadetoscreen(Width,Height): 
     fade = pygame.Surface((Width, Height))
     fade.fill((0,0,0))
-    for alpha in range(200, 0,-1):
+    for alpha in range(200, 0,-5):
         fade.set_alpha(alpha)
         constants.WIN.blit(fade, (0,0))
         pygame.display.update()
