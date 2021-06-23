@@ -15,7 +15,6 @@ def draw_text(text,font,color,surface,x,y):
 def main_menu():
     while True:
             constants.WIN.blit(constants.Background,(0,0))
-            draw_text("",constants.font,constants.WHITE,constants.WIN,20,20)
 
             mx,my=pygame.mouse.get_pos()
             bonk=(mx,my)
@@ -73,7 +72,7 @@ def play_pressed():
     while running:
         
         constants.WIN.blit(constants.Background,(0,0))
-        #draw_text("Play",font,BLUE,WIN,20,20)
+
 
         mx,my=pygame.mouse.get_pos()
         bonk=(mx,my)
@@ -100,29 +99,34 @@ def options_pressed():
     Transition_moving.fadetoscreen(constants.Width,constants.Height)
     while running:
         click=False
-        constants.WIN.blit(constants.Background,(0,0))
+        constants.WIN.blit(constants.Blank_BG,(0,0))
 
         mx,my=pygame.mouse.get_pos()
         bonk=(mx,my)
 
         button_fullscreen=constants.WIN.blit(constants.Image_fullscreen,(35,400))
         button_login=constants.WIN.blit(constants.Image_login,(35,575))
-        button_back=constants.WIN.blit(constants.Image_back,(-10,5))
+        button_back=constants.WIN.blit(constants.Image_back,(10,5))
 
 
 
         if button_fullscreen.collidepoint((bonk)):
-            constants.WIN.blit(constants.Background,(0,0))
+            constants.WIN.blit(constants.Blank_BG,(0,0))
             constants.WIN.blit(constants.Image_fullscreen_enlarged,(35,400))
             constants.WIN.blit(constants.Image_login,(35,575))
-            button_back=constants.WIN.blit(constants.Image_back,(-10,5))
+            button_back=constants.WIN.blit(constants.Image_back,(10,5))
         
         if button_login.collidepoint((bonk)):
-            constants.WIN.blit(constants.Background,(0,0))
+            constants.WIN.blit(constants.Blank_BG,(0,0))
             constants.WIN.blit(constants.Image_login_enlarged,(35,575))
             button_fullscreen=constants.WIN.blit(constants.Image_fullscreen,(35,400))
-            button_back=constants.WIN.blit(constants.Image_back,(-10,5))
+            button_back=constants.WIN.blit(constants.Image_back,(10,5))
 
+        if button_back.collidepoint((bonk)):
+            constants.WIN.blit(constants.Blank_BG,(0,0))
+            constants.WIN.blit(constants.Image_fullscreen,(35,400))
+            constants.WIN.blit(constants.Image_login,(35,575))
+            constants.WIN.blit(constants.Image_back_enlarged,(10,5))
 
         for event in pygame.event.get():
             if event.type==QUIT:
