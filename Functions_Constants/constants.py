@@ -55,3 +55,22 @@ Image_back_enlarged=pygame.transform.scale(Button_back_unrefined,(190,90))
 
 Button_bg_unrefined=pygame.image.load(os.path.join("images","Text_Bg.png"))
 Button_bg=pygame.transform.scale(Button_bg_unrefined,(220,80))
+
+base_font = pygame.font.Font(None, 45)
+user_text = ''
+
+input_rect = pygame.Rect(300,300,315,50)
+rectcol_a = pygame.Color('white')              #active
+rectcol_p = pygame.Color('lightskyblue3')      #passive
+colour = rectcol_p   
+active = False
+charcount = 0
+
+pbase_font = pygame.font.Font(None, 45)
+puser_text = ''
+prectcol_a = pygame.Color('white')              #active
+prectcol_p = pygame.Color('lightskyblue3')      #passive
+pcolour = prectcol_p   
+pinput_rect = pygame.Rect(700,300,315,50)   
+pactive = False
+pcharcount = 0
